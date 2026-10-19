@@ -32,12 +32,14 @@
     </style>
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="antialiased border-top-wide border-primary d-flex flex-column">
-    <div class="page page-center">
-      <div class="container-tight py-4">
+  <body class="antialiased border-top-wide border-primary d-flex flex-column {% block body_class %}{% endblock %}">
+    <div class="page page-center {% block page_class %}{% endblock %}">
+      <div class="container-tight py-4 {% block container_class %}{% endblock %}">
+        {% if org.get_logo_url %}
         <div class="text-center mb-4">
           <a href="."><img src="{{ org.get_logo_url }}" alt=""></a>
         </div>
+        {% endif %}
         {% block content %}{% endblock %}
       </div>
     </div>
