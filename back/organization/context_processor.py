@@ -15,6 +15,7 @@ def org_include(request):
             "ExternalMessageType": ExternalMessage.Type.__dict__,
             "ExternalMessagesPersonType": ExternalMessage.PersonType.__dict__,
             "UserRole": User.Role.__dict__,
+            "product_name": settings.PRODUCT_NAME,
             "source_code_url": settings.SOURCE_CODE_URL,
         }
     except Exception:
@@ -23,5 +24,6 @@ def org_include(request):
         return {
             "org": Organization.objects.none(),
             "DEBUG": settings.DEBUG,
+            "product_name": settings.PRODUCT_NAME,
             "source_code_url": settings.SOURCE_CODE_URL,
         }

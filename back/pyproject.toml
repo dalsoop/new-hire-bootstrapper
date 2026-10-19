@@ -1,5 +1,5 @@
 [project]
-name = "ChiefOnboarding"
+name = "new-hire-bootstrapper"
 version = "2.5.0"
 requires-python = "~=3.13.0"
 dependencies = [

@@ -1,24 +1,17 @@
-# ChiefOnboarding
+# New Hire Bootstrapper
 
-[![Tests](https://github.com/chiefonboarding/ChiefOnboarding/actions/workflows/tests.yml/badge.svg)](https://github.com/chiefonboarding/ChiefOnboarding/actions/workflows/tests.yml)
-[![Coverage Status](https://coveralls.io/repos/github/chiefonboarding/ChiefOnboarding/badge.svg?branch=master)](https://coveralls.io/github/chiefonboarding/ChiefOnboarding?branch=master)
-[![CodeQL](https://github.com/chiefonboarding/ChiefOnboarding/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/chiefonboarding/ChiefOnboarding/actions/workflows/codeql-analysis.yml)
+New Hire Bootstrapper is a Korean-first, on-premises workflow for preparing,
+onboarding, and supporting new employees through Slack or the dashboard.
 
-ChiefOnboarding is a free and open source employee onboarding platform. You can onboarding new hires through Slack or the dashboard. 
-
-> **Modified version notice (2026-10-20):** This fork adds a Korean-first
-> interface, deployment-owned onboarding defaults, and a reproducible
-> on-premises deployment. It is based on
+> **Modified version notice (2026-10-20):** New Hire Bootstrapper adds a
+> Korean-first interface, deployment-owned onboarding defaults, and a
+> reproducible on-premises deployment. It is based on
 > [chiefonboarding/ChiefOnboarding](https://github.com/chiefonboarding/ChiefOnboarding)
 > and remains licensed as a whole under GNU AGPL-3.0. The corresponding source
-> for this deployed version is available from the
-> [`korean-overlay` branch](https://github.com/dalsoop/ChiefOnboarding/tree/korean-overlay).
+> for this deployed version is available from
+> [dalsoop/new-hire-bootstrapper](https://github.com/dalsoop/new-hire-bootstrapper).
 
 ![chiefonboarding timeline overview](docs/static/timeline-overview.png)
-
-Documentation: [https://docs.chiefonboarding.com](https://docs.chiefonboarding.com)
-
-Demo video: [https://www.youtube.com/watch?v=8fYpB8WTH2M](https://www.youtube.com/watch?v=8fYpB8WTH2M)
 
 ## Features
 - **Automatically provision user accounts and trigger webhooks**, see [https://integrations.chiefonboarding.com](https://integrations.chiefonboarding.com) for a list of integrations or create your own!
@@ -29,47 +22,35 @@ Demo video: [https://www.youtube.com/watch?v=8fYpB8WTH2M](https://www.youtube.co
 - **Badges**: reward new hires for the things they have done. This also helps to keep them motivated.
 - **Introductions**: introduce people to new hires.
 - **Admin to do items**: collaborate with colleagues on things that need to be done for the new hire.
-- **Multilingual**: English, Dutch, Portuguese, German, Turkey, French, Spanish, and Japanese are all supported. Need another language? Send us an [email](mailto:hell@chiefonboarding.com)!
+- **Multilingual**: Korean, English, Dutch, Portuguese, German, Turkish, French, Spanish, and Japanese are supported.
 - **Timezones**: It doesn't matter where your new hire lives. You can adjust the timezone per new hire, so they don't get messages in the middle of the night!
 - **Slack bot and dashboard**: your new hires can use the dashboard or the Slack bot. Both provide all features and can be used standalone.
-- **Customizable**: use your logo, add your color scheme, change the email template and even customize the bot to your liking. No one will know you are using ChiefOnboarding.
-- **Transparency, freedom, and privacy**: ChiefOnboarding is completely open-source and licensed under AGPLv3.
-- Host it yourself on your own infrastructure or [let us host it for you](https://chiefonboarding.com/pricing)!
+- **Customizable**: use your logo, add your color scheme, change the email template and customize the bot to your liking.
+- **Transparency, freedom, and privacy**: New Hire Bootstrapper is completely open-source and licensed under AGPLv3.
+- Host it yourself on your own infrastructure.
 
-## Deployment
-Please see [the documentation for full details](https://docs.chiefonboarding.com).
+## On-premises deployment
 
-**Docker**
+Use [`docker-compose.production.yml`](docker-compose.production.yml) with a
+deployment-owned `runtime.env`, `database.env`, external PostgreSQL volume, and
+external `new-hire-bootstrapper` network.
 
-See details here: [ChiefOnboarding on Docker Hub](https://hub.docker.com/r/chiefonboarding/chiefonboarding)
+## Upstream project
 
-**Heroku**
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/chiefonboarding/ChiefOnboarding)
-
-**Render**
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/chiefonboarding/chiefonboarding)
-
-**Elestio**
-
-[![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/chiefonboarding)
-
-**Easypanel**
-
-[![Deploy on Easypanel](https://easypanel.io/img/deploy-on-easypanel-40.svg)](https://easypanel.io/templates/chiefonboarding)
-
-**ZopDay**
-
-[![Deploy on ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=chiefonboarding/chiefonboarding:latest&port=8000)
+New Hire Bootstrapper preserves the upstream architecture and compatibility of
+ChiefOnboarding 2.5.0. Refer to the
+[upstream documentation](https://docs.chiefonboarding.com) for the underlying
+application model and integration details.
 
 ## Support
-This software is provided under an open source license and comes as is. If you have any questions, then you will have to open an issue on Github for that. If you want guaranteed, quick support, then we offer a paid support package for that (best effort - generally under 2 hours response time). Please see our [pricing page](https://chiefonboarding.com/pricing) for more details. 
 
-If you don't want to deal with hosting, maintaining and backing up your ChiefOnboarding instance, then we can do that for you as well. Please see our [pricing page](https://chiefonboarding.com/pricing) for more details.
+This software is provided as-is under its open-source license. Use this
+repository's issue tracker for questions and reproducible bug reports.
 
 ## Security issues
-Please do not create an issue if you found a potential security issue. Email me directly at security@chiefonboarding.com and we will get it resolved ASAP.
+
+Do not disclose potential vulnerabilities in a public issue. Use the
+repository's private security reporting channel.
 
 ## License
 This project is licensed under the AGPLv3 License - see the [LICENSE.md](LICENSE.md) file for details.

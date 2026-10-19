@@ -23,6 +23,7 @@ from .models import Notification, Organization
 def test_initial_setup_hides_deployment_owned_organization_fields(client, settings):
     settings.ORGANIZATION_NAME = "Ranode"
     settings.ORGANIZATION_LANGUAGE = "ko"
+    settings.PRODUCT_NAME = "New Hire Bootstrapper"
     settings.SOURCE_CODE_URL = "https://example.invalid/corresponding-source"
 
     response = client.get(reverse("setup"))
@@ -41,6 +42,7 @@ def test_initial_setup_hides_deployment_owned_organization_fields(client, settin
     assert 'for="id_timezone"' not in content
     assert 'for="id_language"' not in content
     assert "관리자 계정" in content
+    assert "<title>New Hire Bootstrapper</title>" in content
     assert settings.SOURCE_CODE_URL in content
     assert "소스 코드 · AGPL-3.0 · 수정 버전" in content
 
@@ -60,6 +62,7 @@ def test_all_user_interfaces_include_corresponding_source_offer(
     template = Path(settings.BASE_DIR, template_path).read_text()
 
     assert '{% include "source_code_link.html" %}' in template
+    assert "<title>{{ product_name }}</title>" in template
 
 
 @pytest.mark.django_db

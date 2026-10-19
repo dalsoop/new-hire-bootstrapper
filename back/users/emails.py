@@ -20,9 +20,10 @@ def email_new_admin_cred(user):
             "type": "paragraph",
             "data": {
                 "text": _(
-                    "Someone in your organisation invited you to join ChiefOnboarding."
-                    "Here are your login details:"
-                ),
+                    "Someone in your organisation invited you to join "
+                    "%(product_name)s. Here are your login details:"
+                )
+                % {"product_name": settings.PRODUCT_NAME},
             },
         },
         {

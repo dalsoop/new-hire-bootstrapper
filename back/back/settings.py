@@ -103,9 +103,13 @@ INSTALLED_APPS = [
 # custom
 ORGANIZATION_NAME = env("ORGANIZATION_NAME", default="Ranode")
 ORGANIZATION_LANGUAGE = env("ORGANIZATION_LANGUAGE", default="ko")
+PRODUCT_NAME = env(
+    "NEW_HIRE_BOOTSTRAPPER_NAME",
+    default=env("CHIEFONBOARDING_NAME", default="New Hire Bootstrapper"),
+)
 SOURCE_CODE_URL = env(
     "SOURCE_CODE_URL",
-    default="https://github.com/dalsoop/ChiefOnboarding/tree/korean-overlay",
+    default="https://github.com/dalsoop/new-hire-bootstrapper/tree/master",
 )
 ALLOW_LOGIN_WITH_CREDENTIALS = env.bool("ALLOW_LOGIN_WITH_CREDENTIALS", True)
 # allauth
@@ -135,7 +139,7 @@ ACCOUNT_MAX_EMAIL_ADDRESSES = 1
 ACCOUNT_PRESERVE_USERNAME_CASING = False  # lowercases username (email) value
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = "email"
-MFA_TOTP_ISSUER = env("CHIEFONBOARDING_NAME", default="ChiefOnboarding")
+MFA_TOTP_ISSUER = PRODUCT_NAME
 # social
 SOCIALACCOUNT_AUTO_SIGNUP = env.bool("SSO_AUTO_CREATE_USER", default=False)
 SOCIALACCOUNT_EMAIL_AUTHENTICATION = True

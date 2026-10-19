@@ -169,17 +169,18 @@ def test_administrator_settings_delete_other_account(client, admin_factory):
 
 
 @pytest.mark.django_db
-def test_create_administrator(client, admin_factory, mailoutbox):
+def test_create_administrator(client, admin_factory, mailoutbox, settings):
+    settings.PRODUCT_NAME = "New Hire Bootstrapper"
     admin_user1 = admin_factory()
     client.force_login(admin_user1)
     url = reverse("settings:administrators-create")
 
     response = client.get(url)
     # Only show admin/manager options
-    assert "Administrator" in response.content.decode()
-    assert "Manager" in response.content.decode()
-    assert "Other" not in response.content.decode()
-    assert "New Hire" not in response.content.decode()
+    assert [
+        (value, str(label))
+        for value, label in response.context["form"].fields["role"].choices
+    ] == [(1, "Administrator"), (2, "Manager")]
 
     data = {
         "first_name": "Stan",
@@ -195,6 +196,7 @@ def test_create_administrator(client, admin_factory, mailoutbox):
     assert len(mailoutbox) == 1
     assert mailoutbox[0].subject == "Your login credentials!"
     assert new_admin_user.email in mailoutbox[0].alternatives[0][0]
+    assert settings.PRODUCT_NAME in mailoutbox[0].alternatives[0][0]
     assert len(mailoutbox[0].to) == 1
     assert mailoutbox[0].to[0] == new_admin_user.email
 
@@ -235,10 +237,10 @@ def test_change_administrator(client, admin_factory, new_hire_factory):
     response = client.get(url)
 
     # Only show admin/manager options
-    assert "Administrator" in response.content.decode()
-    assert "Manager" in response.content.decode()
-    assert "Other" not in response.content.decode()
-    assert "New Hire" not in response.content.decode()
+    assert [
+        (value, str(label))
+        for value, label in response.context["form"].fields["role"].choices
+    ] == [(1, "Administrator"), (2, "Manager")]
 
     response = client.post(url, data={"role": 2}, follow=True)
 
