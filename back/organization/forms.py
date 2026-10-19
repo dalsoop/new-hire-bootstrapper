@@ -24,15 +24,13 @@ class InitalAdminAccountForm(UserCreationForm):
         self.fields["name"].widget = forms.HiddenInput()
         self.fields["timezone"].initial = "Asia/Seoul"
         self.fields["timezone"].widget = forms.HiddenInput()
-        self.fields["language"].initial = "ko"
+        self.fields["language"].initial = settings.ORGANIZATION_LANGUAGE
+        self.fields["language"].widget = forms.HiddenInput()
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field("name"),
             Field("timezone"),
-            Div(
-                Div(Field("language"), css_class="col-12"),
-                css_class="row",
-            ),
+            Field("language"),
             HTML(f"<h2>{_('Account')}</h2>"),
             Div(
                 Div(Field("first_name"), css_class="col-6"),
@@ -53,6 +51,9 @@ class InitalAdminAccountForm(UserCreationForm):
 
     def clean_timezone(self):
         return "Asia/Seoul"
+
+    def clean_language(self):
+        return settings.ORGANIZATION_LANGUAGE
 
     class Meta:
         model = get_user_model()
