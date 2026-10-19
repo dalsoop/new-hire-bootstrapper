@@ -36,7 +36,6 @@ services:
 volumes:
   new-hire-bootstrapper-postgres:
     external: true
-    name: ${NEW_HIRE_BOOTSTRAPPER_POSTGRES_VOLUME:-chief-onboarding-postgres}
 
 networks:
   new-hire-bootstrapper:

@@ -103,10 +103,7 @@ INSTALLED_APPS = [
 # custom
 ORGANIZATION_NAME = env("ORGANIZATION_NAME", default="Ranode")
 ORGANIZATION_LANGUAGE = env("ORGANIZATION_LANGUAGE", default="ko")
-PRODUCT_NAME = env(
-    "NEW_HIRE_BOOTSTRAPPER_NAME",
-    default=env("CHIEFONBOARDING_NAME", default="New Hire Bootstrapper"),
-)
+PRODUCT_NAME = env("NEW_HIRE_BOOTSTRAPPER_NAME", default="New Hire Bootstrapper")
 SOURCE_CODE_URL = env(
     "SOURCE_CODE_URL",
     default="https://github.com/dalsoop/new-hire-bootstrapper/tree/master",
