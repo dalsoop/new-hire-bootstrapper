@@ -6,6 +6,14 @@
 
 ChiefOnboarding is a free and open source employee onboarding platform. You can onboarding new hires through Slack or the dashboard. 
 
+> **Modified version notice (2026-10-20):** This fork adds a Korean-first
+> interface, deployment-owned onboarding defaults, and a reproducible
+> on-premises deployment. It is based on
+> [chiefonboarding/ChiefOnboarding](https://github.com/chiefonboarding/ChiefOnboarding)
+> and remains licensed as a whole under GNU AGPL-3.0. The corresponding source
+> for this deployed version is available from the
+> [`korean-overlay` branch](https://github.com/dalsoop/ChiefOnboarding/tree/korean-overlay).
+
 ![chiefonboarding timeline overview](docs/static/timeline-overview.png)
 
 Documentation: [https://docs.chiefonboarding.com](https://docs.chiefonboarding.com)

@@ -103,6 +103,10 @@ INSTALLED_APPS = [
 # custom
 ORGANIZATION_NAME = env("ORGANIZATION_NAME", default="Ranode")
 ORGANIZATION_LANGUAGE = env("ORGANIZATION_LANGUAGE", default="ko")
+SOURCE_CODE_URL = env(
+    "SOURCE_CODE_URL",
+    default="https://github.com/dalsoop/ChiefOnboarding/tree/korean-overlay",
+)
 ALLOW_LOGIN_WITH_CREDENTIALS = env.bool("ALLOW_LOGIN_WITH_CREDENTIALS", True)
 # allauth
 SOCIALACCOUNT_ONLY = not ALLOW_LOGIN_WITH_CREDENTIALS

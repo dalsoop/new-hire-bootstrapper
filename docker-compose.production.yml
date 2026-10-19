@@ -19,7 +19,7 @@ services:
       - chief-onboarding
 
   web:
-    image: ${CHIEF_ONBOARDING_IMAGE:-chief-onboarding-korean:2.5.0-ranode.1}
+    image: ${CHIEF_ONBOARDING_IMAGE:-chief-onboarding-korean:2.5.0-ranode.2}
     container_name: chief-onboarding-app
     restart: unless-stopped
     env_file:

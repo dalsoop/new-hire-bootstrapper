@@ -304,6 +304,9 @@ msgstr "사용 설명서"
 msgid "Source code"
 msgstr "소스 코드"
 
+msgid "Modified version"
+msgstr "수정 버전"
+
 msgid "Search by name or email"
 msgstr "이름 또는 이메일로 검색"
 
