@@ -15,8 +15,13 @@ def org_include(request):
             "ExternalMessageType": ExternalMessage.Type.__dict__,
             "ExternalMessagesPersonType": ExternalMessage.PersonType.__dict__,
             "UserRole": User.Role.__dict__,
+            "source_code_url": settings.SOURCE_CODE_URL,
         }
     except Exception:
         # will only fail when user has not ran migrations yet. Org is set up during
         # setup
-        return {"org": Organization.objects.none(), "DEBUG": settings.DEBUG}
+        return {
+            "org": Organization.objects.none(),
+            "DEBUG": settings.DEBUG,
+            "source_code_url": settings.SOURCE_CODE_URL,
+        }

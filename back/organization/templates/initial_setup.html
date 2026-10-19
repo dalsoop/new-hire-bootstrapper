@@ -1,6 +1,9 @@
 {% extends 'no_login_base.html' %}
 {% load i18n static %}
 {% load crispy_forms_tags %}
+{% block body_class %}setup-page{% endblock %}
+{% block page_class %}setup-page-layout{% endblock %}
+{% block container_class %}setup-container{% endblock %}
 {% block extra_head %}
 <style>
   /* the button would be blank without this as the org (which defines the color) is not created yet */
@@ -9,6 +12,25 @@
     --tblr-btn-hover-bg: rgb(153, 131, 92);
     --tblr-primary-rgb: rgb(153, 131, 92);
     --tblr-primary-darker: rgb(153, 131, 92);
+  }
+  .setup-page-layout {
+    justify-content: flex-start;
+  }
+  .setup-container {
+    max-width: 34rem;
+    padding-top: 1.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  .setup-container .card-body {
+    padding: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .setup-container {
+      padding-top: 2rem !important;
+    }
+    .setup-container .card-body {
+      padding: 2rem;
+    }
   }
 </style>
 {% endblock %}

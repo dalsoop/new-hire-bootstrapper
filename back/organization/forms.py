@@ -20,16 +20,18 @@ class InitalAdminAccountForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["name"].initial = settings.ORGANIZATION_NAME
+        self.fields["name"].widget = forms.HiddenInput()
+        self.fields["timezone"].initial = "Asia/Seoul"
+        self.fields["timezone"].widget = forms.HiddenInput()
+        self.fields["language"].initial = settings.ORGANIZATION_LANGUAGE
+        self.fields["language"].widget = forms.HiddenInput()
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            HTML("<h2>Organization</h2>"),
-            Div(
-                Div(Field("name"), css_class="col-12"),
-                Div(Field("timezone"), css_class="col-12"),
-                Div(Field("language"), css_class="col-12"),
-                css_class="row",
-            ),
-            HTML("<h2>Account</h2>"),
+            Field("name"),
+            Field("timezone"),
+            Field("language"),
+            HTML(f"<h2>{_('Account')}</h2>"),
             Div(
                 Div(Field("first_name"), css_class="col-6"),
                 Div(Field("last_name"), css_class="col-6"),
@@ -41,8 +43,17 @@ class InitalAdminAccountForm(UserCreationForm):
                 Div(Field("password2"), css_class="col-12"),
                 css_class="row",
             ),
-            Submit(name="submit", value="Submit"),
+            Submit(name="submit", value=_("Submit")),
         )
+
+    def clean_name(self):
+        return settings.ORGANIZATION_NAME
+
+    def clean_timezone(self):
+        return "Asia/Seoul"
+
+    def clean_language(self):
+        return settings.ORGANIZATION_LANGUAGE
 
     class Meta:
         model = get_user_model()
