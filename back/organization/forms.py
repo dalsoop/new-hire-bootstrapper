@@ -21,6 +21,7 @@ class InitalAdminAccountForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["timezone"].initial = "Asia/Seoul"
+        self.fields["timezone"].widget = forms.HiddenInput()
         self.fields["language"].initial = "ko"
         self.helper = FormHelper()
         self.helper.layout = Layout(
