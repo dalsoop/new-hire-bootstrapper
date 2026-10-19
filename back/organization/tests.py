@@ -13,7 +13,56 @@ from django.utils import timezone
 from misc.models import File
 from misc.s3 import S3
 
+from .forms import InitalAdminAccountForm
 from .models import Notification, Organization
+
+
+@pytest.mark.django_db
+@pytest.mark.no_run_around_tests
+def test_initial_setup_hides_deployment_owned_organization_fields(client, settings):
+    settings.ORGANIZATION_NAME = "Ranode"
+    settings.ORGANIZATION_LANGUAGE = "ko"
+
+    response = client.get(reverse("setup"))
+
+    assert response.status_code == 200
+    form = response.context["form"]
+    assert form.fields["name"].initial == "Ranode"
+    assert form.fields["timezone"].initial == "Asia/Seoul"
+    assert form.fields["language"].initial == "ko"
+    assert form.fields["name"].widget.is_hidden
+    assert form.fields["timezone"].widget.is_hidden
+    assert form.fields["language"].widget.is_hidden
+
+    content = response.content.decode()
+    assert 'for="id_name"' not in content
+    assert 'for="id_timezone"' not in content
+    assert 'for="id_language"' not in content
+    assert "관리자 계정" in content
+
+
+@pytest.mark.django_db
+@pytest.mark.no_run_around_tests
+def test_initial_setup_ignores_posted_organization_overrides(settings):
+    settings.ORGANIZATION_NAME = "Ranode"
+    settings.ORGANIZATION_LANGUAGE = "ko"
+    form = InitalAdminAccountForm(
+        data={
+            "name": "Tampered organization",
+            "timezone": "UTC",
+            "language": "en",
+            "first_name": "Test",
+            "last_name": "Administrator",
+            "email": "admin@example.invalid",
+            "password1": "Synthetic-Test-Only-9472!",
+            "password2": "Synthetic-Test-Only-9472!",
+        }
+    )
+
+    assert form.is_valid(), form.errors
+    assert form.cleaned_data["name"] == "Ranode"
+    assert form.cleaned_data["timezone"] == "Asia/Seoul"
+    assert form.cleaned_data["language"] == "ko"
 
 
 @pytest.mark.django_db
@@ -292,17 +341,23 @@ def test_notification_can_delete(notification_factory):
 
 @pytest.mark.no_run_around_tests
 @pytest.mark.django_db(reset_sequences=True)
-def test_initial_setup_page(client):
+def test_initial_setup_page(client, settings):
+    settings.ORGANIZATION_NAME = "Ranode"
+    settings.ORGANIZATION_LANGUAGE = "ko"
+
     # account login redirects to setup page
     url = reverse("account_login")
     response = client.get(url, follow=True)
 
     # page renders, no org created yet
     assert response.status_code == 200
-    assert "Organization" in response.content.decode()
-    assert "First name" in response.content.decode()
-    assert "Last name" in response.content.decode()
-    assert "Language" in response.content.decode()
+    content = response.content.decode()
+    assert "관리자 계정" in content
+    assert 'for="id_first_name"' in content
+    assert 'for="id_last_name"' in content
+    assert 'for="id_name"' not in content
+    assert 'for="id_timezone"' not in content
+    assert 'for="id_language"' not in content
 
     assert not Organization.objects.all().exists()
     assert not get_user_model().objects.all().exists()
@@ -310,7 +365,7 @@ def test_initial_setup_page(client):
     response = client.post(
         reverse("setup"),
         data={
-            "name": "test org",
+            "name": "posted organization override",
             "language": "en",
             "timezone": "UTC",
             "first_name": "John",
@@ -325,6 +380,10 @@ def test_initial_setup_page(client):
     assert response.status_code == 200
     assert Organization.objects.all().exists()
     assert get_user_model().objects.all().exists()
+    organization = Organization.objects.get()
+    assert organization.name == settings.ORGANIZATION_NAME
+    assert organization.language == settings.ORGANIZATION_LANGUAGE
+    assert organization.timezone == "Asia/Seoul"
 
 
 @pytest.mark.django_db

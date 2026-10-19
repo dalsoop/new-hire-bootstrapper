@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.utils import translation
 
 from organization.models import Organization
 
@@ -21,6 +23,10 @@ class SetupOrgMiddleware:
 
     def __call__(self, request):
         org = Organization.object.get()
-        if org is None and request.path != "/setup/":
-            return redirect("setup")
+        if org is None:
+            translation.activate(settings.ORGANIZATION_LANGUAGE)
+            if request.path != "/setup/":
+                return redirect("setup")
+        else:
+            translation.activate(org.language)
         return self.get_response(request)
