@@ -20,15 +20,16 @@ class InitalAdminAccountForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["name"].initial = settings.ORGANIZATION_NAME
+        self.fields["name"].widget = forms.HiddenInput()
         self.fields["timezone"].initial = "Asia/Seoul"
         self.fields["timezone"].widget = forms.HiddenInput()
         self.fields["language"].initial = "ko"
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            HTML(f"<h2>{_('Organization')}</h2>"),
+            Field("name"),
+            Field("timezone"),
             Div(
-                Div(Field("name"), css_class="col-12"),
-                Div(Field("timezone"), css_class="col-12"),
                 Div(Field("language"), css_class="col-12"),
                 css_class="row",
             ),
@@ -46,6 +47,12 @@ class InitalAdminAccountForm(UserCreationForm):
             ),
             Submit(name="submit", value=_("Submit")),
         )
+
+    def clean_name(self):
+        return settings.ORGANIZATION_NAME
+
+    def clean_timezone(self):
+        return "Asia/Seoul"
 
     class Meta:
         model = get_user_model()
