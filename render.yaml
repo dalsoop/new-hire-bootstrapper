@@ -1,19 +1,19 @@
 databases:
-  - name: chiefonboardingdb
+  - name: newhirebootstrapperdb
     region: frankfurt
-    databaseName: chiefonboardingdb
+    databaseName: newhirebootstrapperdb
     ipAllowList: []
 
 services:
   - type: web
-    name: chiefonboarding
+    name: new-hire-bootstrapper
     region: frankfurt
     env: docker
     dockerfilePath: ./back/Dockerfile
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: chiefonboardingdb
+          name: newhirebootstrapperdb
           property: connectionString
       - key: ALLOWED_HOSTS
         sync: false

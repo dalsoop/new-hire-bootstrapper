@@ -1,10 +1,9 @@
 {
-  "name": "ChiefOnboarding",
-  "description": "Free and open-source employee onboarding platform. Onboard new hires through Slack or the web portal.",
-  "repository": "https://github.com/chiefonboarding/ChiefOnboarding",
-  "logo": "https://avatars.githubusercontent.com/u/29075722",
-  "keywords": ["python", "django", "employee", "onboarding", "slack"],
-  "website": "https://chiefonboarding.com/",
+  "name": "New Hire Bootstrapper",
+  "description": "Korean-first workflow for preparing and onboarding new employees through Slack or the web portal.",
+  "repository": "https://github.com/dalsoop/new-hire-bootstrapper",
+  "keywords": ["python", "django", "new-hire", "onboarding", "slack"],
+  "website": "https://github.com/dalsoop/new-hire-bootstrapper",
   "formation": {
     "web": {
       "quantity": 1,
@@ -29,7 +28,7 @@
       "value": "True"
     },
     "ALLOWED_HOSTS": {
-      "description": "This is the base url of your application. This can be a heroku url (xxxx.herokuapp.com - which matches your domain for this app) or your own (sub) domain. Format: test.chiefonboarding.com",
+      "description": "The base URL of the application, such as a Heroku URL or new-hire-bootstrapper.example.com.",
       "required": true
     }
   }
