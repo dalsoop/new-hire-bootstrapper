@@ -1,9 +1,9 @@
-name: chief-onboarding
+name: new-hire-bootstrapper
 
 services:
   db:
     image: postgres@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
-    container_name: chief-onboarding-db
+    container_name: new-hire-bootstrapper-db
     restart: unless-stopped
     env_file:
       - path: database.env
@@ -14,13 +14,13 @@ services:
       timeout: 5s
       retries: 12
     volumes:
-      - chief-onboarding-postgres:/var/lib/postgresql/data
+      - new-hire-bootstrapper-postgres:/var/lib/postgresql/data
     networks:
-      - chief-onboarding
+      - new-hire-bootstrapper
 
   web:
-    image: ${CHIEF_ONBOARDING_IMAGE:-chief-onboarding-korean:2.5.0-ranode.2}
-    container_name: chief-onboarding-app
+    image: ${NEW_HIRE_BOOTSTRAPPER_IMAGE:-new-hire-bootstrapper:2.5.0-ranode.3}
+    container_name: new-hire-bootstrapper-app
     restart: unless-stopped
     env_file:
       - path: runtime.env
@@ -31,12 +31,13 @@ services:
       db:
         condition: service_healthy
     networks:
-      - chief-onboarding
+      - new-hire-bootstrapper
 
 volumes:
-  chief-onboarding-postgres:
+  new-hire-bootstrapper-postgres:
     external: true
+    name: ${NEW_HIRE_BOOTSTRAPPER_POSTGRES_VOLUME:-chief-onboarding-postgres}
 
 networks:
-  chief-onboarding:
+  new-hire-bootstrapper:
     external: true

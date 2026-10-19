@@ -295,6 +295,15 @@ msgstr "기본 언어 변경"
 msgid "Employee onboarding"
 msgstr "직원 온보딩"
 
+msgid "Based on ChiefOnboarding"
+msgstr "ChiefOnboarding 기반"
+
+msgid "Someone in your organisation invited you to join %(product_name)s. Here are your login details:"
+msgstr "조직에서 %(product_name)s에 초대했습니다. 로그인 정보는 다음과 같습니다:"
+
+msgid "Completely remove them. Access to this application will be revoked entirely. Third party accounts remain."
+msgstr "사용자를 완전히 삭제합니다. 이 애플리케이션에 대한 접근 권한은 모두 취소되지만 외부 서비스 계정은 유지됩니다."
+
 msgid "Dashboard"
 msgstr "대시보드"
 
